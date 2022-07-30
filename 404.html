@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MapleCTF 2022 - Coming Soon 🍁</title>
+    <link
+      rel="stylesheet"
+      href="http://ronenness.github.io/RPGUI/rpgui/rpgui.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Press Start 2P";
+    }
+    .section {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      text-align: center;
+      padding: 0 auto;
+    }
+    .wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .block {
+      max-width: 50vw;
+      text-align: center;
+      white-space: normal;
+    }
+    html {
+      background-image: url("https://wallpaper.dog/large/11005245.jpg");
+      background-size: cover;
+    }
+    .navbar {
+      position: absolute;
+      height: 120px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #maple-chan {
+      position: absolute;
+      height: 300px;
+      object-fit: cover;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 1200px) {
+      #maple-chan {
+        height: 30%;
+      }
+      h1 {
+        font-size: 30px !important;
+        line-height: 1.5em;
+      }
+      #challenges {
+        display: none;
+      }
+      .section {
+        width: 100vw;
+      }
+      .block {
+        max-width: 90vw;
+        max-height: 50vh;
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+      #maple-chan {
+        height: 30%;
+      }
+      h1 {
+        font-size: 25px !important;
+        line-height: 1.5em;
+      }
+      #about,
+      #challenges,
+      #countdown {
+        display: none;
+      }
+      .section {
+        width: 100vw;
+      }
+      .block {
+        max-width: 100vw;
+        max-height: 50vh;
+        margin: 10vw;
+      }
+    }
+  </style>
+  <body class="rpgui-content">
+    <div class="rpgui-container framed-golden navbar">
+      <h1 style="font-size: 40px; margin-bottom: -2px">Maple CTF 2022</h1>
+      <div>
+        <a href="https://maplebacon.org/about/" style="text-decoration: none">
+          <button class="rpgui-button" id="about">About Us</button>
+        </a>
+        <a href="https://ctf.maplebacon.org/">
+          <button class="rpgui-button" id="challenges">Go to CTF</button>
+        </a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="section">
+        <div class="wrapper">
+          <div class="rpgui-container framed block">
+            <h1 style="font-size: 40px">Coming soon...</h1>
+            <div id="countdown">
+              <button
+                class="rpgui-button golden"
+                style="pointer-events: none; min-width: 10px"
+                id="days"
+              >
+                <p>--</p>
+              </button>
+              <p style="display: inline">&nbsp;D&nbsp;</p>
+              <button
+                class="rpgui-button golden"
+                style="pointer-events: none; min-width: 10px"
+                id="hours"
+              >
+                <p>--</p>
+              </button>
+              <p style="display: inline">&nbsp;H&nbsp;</p>
+              <button
+                class="rpgui-button golden"
+                style="pointer-events: none; min-width: 10px"
+                id="minutes"
+              >
+                <p>--</p>
+              </button>
+              <p style="display: inline">&nbsp;M&nbsp;</p>
+              <button
+                class="rpgui-button golden"
+                style="pointer-events: none; min-width: 10px"
+                id="secs"
+              >
+                <p>--</p>
+              </button>
+              <p style="display: inline">&nbsp;S&nbsp;</p>
+            </div>
+            <p id="mobile-countdown">5PM PDT August 26th - August 28th</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img src="../assets/images/maplechan.png" id="maple-chan" />
+  </body>
+
+  <script>
+    var START_DATE = new Date(1661558400 * 1000);
+    var x = setInterval(function () {
+      var now = new Date().getTime();
+
+      var distance = START_DATE - now;
+
+      var days = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(
+        2,
+        "0"
+      );
+      var hours = String(
+        Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      ).padStart(2, "0");
+      var minutes = String(
+        Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+      ).padStart(2, "0");
+      var seconds = String(
+        Math.floor((distance % (1000 * 60)) / 1000)
+      ).padStart(2, "0");
+
+      document.getElementById("days").innerHTML = `<p>${days}</p>`;
+      document.getElementById("hours").innerHTML = `<p>${hours}</p>`;
+      document.getElementById("minutes").innerHTML = `<p>${minutes}</p>`;
+      document.getElementById("secs").innerHTML = `<p>${seconds}</p>`;
+
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("#mobile-countdown").innerHTML =
+          "Currently running, until 5PM PDT August 28th!";
+        document.getElementById("#countdown").style.display = "none";
+      }
+    }, 1000);
+  </script>
+  <script src="http://ronenness.github.io/RPGUI/rpgui/rpgui.min.js"></script>
+</html>
