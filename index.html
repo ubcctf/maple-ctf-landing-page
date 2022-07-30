@@ -1,58 +1,373 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>MapleCTF 2022</title>
-  <link rel="stylesheet" href="https://ubcctf.github.io/assets/css/styles.css"/>
-  <meta name="image" property="og:image" content="https://ubcctf.github.io/favicon.png"/>
-  <meta name="description" property="og:description" content="Maple Bacon's first international CTF competition."/>
-  <link rel="shortcut icon" type="image/png" href="https://ubcctf.github.io/favicon.png"/>
-  <link href="https://fonts.googleapis.com/css?family=Inconsolata:700|Overpass+Mono" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" crossorigin="anonymous"
-    onload='renderMathInElement(document.body, {delimiters: [
-            {left: "$$", right: "$$", display: true},
-            {left: "\\(", right: "\\)", display: false},
-            {left: "\\[", right: "\\]", display: true},
-            {left: "$", right: "$", display: false}
-    ]});'>
-  </script>
-</head>
-<!-- <image src="assets/images/mapel.png" alt="PURE ART SKILL" style="opacity: 0.20;"></image> -->
-<!-- <style> body { background-image: url(assets/images/mapel-transparent.png); background-size: cover; } </style> -->
-<body>
-  <div id="container">
-    <header>
-      <nav>
-        <a href="https://ubcctf.github.io/about">about</a>
-        <a href="https://ubcctf.github.io/getting_started">getting_started</a>
-        <a href="https://ubcctf.github.io/blog">blog</a>
-        <a href="https://ubcctf.github.io/members">members</a>
-        <a href="https://ubcctf.github.io/challenge">challenge</a>
-      </nav>
-      <div class="logo">
-        <a href="https://ubcctf.github.io">
-          <img src="assets/images/logo.svg">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MapleCTF 2022 🍁</title>
+    <link
+      rel="stylesheet"
+      href="http://ronenness.github.io/RPGUI/rpgui/rpgui.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Press Start 2P";
+    }
+    .section {
+      position: relative;
+      width: 50vw;
+      height: 100vh;
+      text-align: center;
+      padding: 0 20vw;
+    }
+    .wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .block {
+      max-width: 50vw;
+      text-align: center;
+      white-space: normal;
+    }
+    html {
+      background-image: url("https://wallpaper.dog/large/11005245.jpg");
+      background-size: cover;
+    }
+    .navbar {
+      position: absolute;
+      height: 120px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #maple-chan {
+      position: absolute;
+      height: 300px;
+      object-fit: cover;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes MoveUpDown {
+      0%,
+      100% {
+        bottom: 0;
+      }
+      50% {
+        bottom: 15px;
+      }
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 1200px) {
+      #maple-chan {
+        height: 20%;
+      }
+      h1 {
+        font-size: 20px !important;
+        line-height: 1.5em;
+      }
+      #challenges {
+        display: none;
+      }
+      .section {
+        width: 100vw;
+        padding: 0 10vw;
+      }
+      .block {
+        max-width: 80vw;
+        max-height: 50vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+      #first-block {
+        max-width: 100vw;
+        margin-left: -3% !important;
+        overflow-y: hidden;
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+      #maple-chan {
+        height: 30%;
+      }
+      h1 {
+        font-size: 20px !important;
+        line-height: 1.5em;
+      }
+      #about,
+      #challenges,
+      #countdown {
+        display: none;
+      }
+      .section {
+        width: 70vw;
+        margin: 0 20px;
+        padding: 0 10vw;
+      }
+      .block {
+        max-width: 90vw;
+        max-height: 50vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+      #first-block {
+        max-width: 120vw;
+        margin-left: -0.5% !important;
+        overflow-y: hidden;
+      }
+    }
+  </style>
+  <body class="rpgui-content">
+    <div class="rpgui-container framed-golden navbar">
+      <h1 style="font-size: 40px; margin-bottom: -2px">Maple CTF 2022</h1>
+      <div>
+        <a href="https://maplebacon.org/about/" style="text-decoration: none">
+          <button class="rpgui-button" id="about">About Us</button>
+        </a>
+        <a href="https://ctf.maplebacon.org/">
+          <button class="rpgui-button" id="challenges">Go to CTF</button>
         </a>
       </div>
-      <div class="title-container">
-        <div class="title"><a href="https://ubcctf.github.io/teamname"><span>Maple Bacon</span></a></div>
-        <div class="subtitle">
-          <span>
-            CTF Team at the University of British Columbia
-          </span>
+    </div>
+    <div class="container">
+      <div class="section">
+        <div class="wrapper">
+          <div
+            class="rpgui-container framed block"
+            style="margin-left: 2.5%"
+            id="first-block"
+          >
+            <h1 style="font-size: 40px">Maple CTF 2022</h1>
+            <div id="countdown">
+              <button
+                class="rpgui-button golden"
+                style="pointer-events: none; min-width: 10px"
+                id="days"
+              >
+                <p>--</p>
+              </button>
+              <p style="display: inline">&nbsp;D&nbsp;</p>
+              <button
+                class="rpgui-button golden"
+                style="pointer-events: none; min-width: 10px"
+                id="hours"
+              >
+                <p>--</p>
+              </button>
+              <p style="display: inline">&nbsp;H&nbsp;</p>
+              <button
+                class="rpgui-button golden"
+                style="pointer-events: none; min-width: 10px"
+                id="minutes"
+              >
+                <p>--</p>
+              </button>
+              <p style="display: inline">&nbsp;M&nbsp;</p>
+              <button
+                class="rpgui-button golden"
+                style="pointer-events: none; min-width: 10px"
+                id="secs"
+              >
+                <p>--</p>
+              </button>
+              <p style="display: inline">&nbsp;S&nbsp;</p>
+            </div>
+            <p id="mobile-countdown">5PM PDT August 26th - August 28th</p>
+            <p>Hosted by <a href="https://maplebacon.org/">Maple Bacon</a>.</p>
+            <p>→ → → keep scrolling! → → →</p>
+            <div>
+              <a href="https://ctf.maplebacon.org/login">
+                <button class="rpgui-button">Sign up</button>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-    </header>
-    <div class="content">
-      <div class="description">
-        <image id="maplectf-logo" src="assets/images/maplectf.png" alt="MapleCTF 2022 logo" width="400px" height="400px" onmouseover="document.getElementById('maplectf-logo').src='assets/images/mapel-transparent.png';" onmouseout="document.getElementById('maplectf-logo').src='assets/images/maplectf.png';"></image>
-        <p>Coming end of August.</p>
-        <p>Infra sponsored by goo.gle/ctfsponsorship</p>
+      <div class="section">
+        <div class="wrapper">
+          <div class="rpgui-container framed block">
+            <h1 style="font-size: 40px">Prizes</h1>
+            <p>First place: 2000 USD</p>
+            <p>Second place: 1000 USD</p>
+            <p>Third place: 500 USD</p>
+            <p><em>Writeup prizes: TBD</em></p>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="wrapper">
+          <div class="rpgui-container framed block">
+            <h1 style="font-size: 40px">What is a CTF?</h1>
+            <p style="white-space: normal">
+              Capture The Flag competitions or “CTFs” for short are competitions
+              in which players attempt to solve computer security related
+              problems in the form of challenges with present vulnerabilities in
+              order to obtain a secret piece of text known as the “flag” and
+              turn it in for points. It’s a great way to gain a wide breadth of
+              knowledge in all things related to computer systems, while also
+              achieving a sense of accomplishment and competition along the way.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="wrapper">
+          <div class="rpgui-container framed block">
+            <h1 style="font-size: 40px">FAQ</h1>
+            <p><em>How should I get started?</em></p>
+            <p style="white-space: normal">
+              <a
+                href="https://picoctf.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >picoCTF</a
+              >
+              is an excellent beginner CTF, as it contains many different types
+              of problems, with more gradually unlocking as you become more
+              proficient in different categories.
+            </p>
+            <p style="white-space: normal">
+              <em>What category should I focus on?</em>
+            </p>
+            <p style="white-space: normal">
+              Whichever one your heart desires! We don’t enforce any policy that
+              would dictate what category you should develop skills in. Some
+              people may find they like cryptography over binary exploits, or
+              reverse engineering over web application security. We encourage
+              everyone to explore and learn what they like, wether that be one
+              or two specific categories, or an overall understanding of all
+              categories.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="wrapper">
+          <div class="rpgui-container framed block" style="margin-right: 3%">
+            <h1 style="font-size: 40px">About Us</h1>
+            <p style="white-space: normal">
+              Maple Bacon is the CTF team at the
+              <a href="ubc.ca" target="_blank" rel="noopener noreferrer"
+                >University of British Columbia</a
+              >. Our team was initially formed by
+              <a
+                href="https://www.robertxiao.ca/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Robert Xiao</a
+              >
+              in February 2019 shortly after he took his position in the CS
+              department. Our worldwide ranking and history can be found on
+              <a
+                href="https://ctftime.org/team/73723"
+                target="_blank"
+                rel="noopener noreferrer"
+                >ctftime.org</a
+              >.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</body>
+    <img src="assets/images/maplechan.png" id="maple-chan" />
+  </body>
+
+  <script src="assets/js/hscroll.js"></script>
+  <script>
+    var blocks = document.getElementsByClassName("section");
+    var container = document.getElementsByClassName("container");
+    var hs = new HorizontalScroll.default({
+      blocks: blocks,
+      container: container,
+      springEffect: 0.8,
+    });
+
+    const maple = document.getElementById("maple-chan");
+
+    document.addEventListener("mousewheel", function (event) {
+      if (event.wheelDelta >= 0) {
+        maple.style.transform = "translateX(-50%) scaleX(-1)";
+      } else {
+        maple.style.transform = "translateX(-50%) scaleX(1)";
+      }
+      maple.style.animation = "MoveUpDown 0.5s step-end infinite";
+      setTimeout(() => {
+        maple.style.animation = "";
+      }, 1000);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (
+        e.key === "Down" ||
+        e.key === "ArrowDown" ||
+        e.key === "Right" ||
+        e.key === "ArrowRight"
+      ) {
+        maple.style.transform = "translateX(-50%) scaleX(1)";
+      } else if (
+        e.key === "Up" ||
+        e.key === "ArrowUp" ||
+        e.key === "Left" ||
+        e.key === "ArrowLeft"
+      ) {
+        maple.style.transform = "translateX(-50%) scaleX(-1)";
+      }
+      maple.style.animation = "MoveUpDown 0.5s step-end infinite";
+      setTimeout(() => {
+        maple.style.animation = "";
+      }, 1000);
+    });
+
+    var START_DATE = new Date(1661558400 * 1000);
+    var x = setInterval(function () {
+      var now = new Date().getTime();
+
+      var distance = START_DATE - now;
+
+      var days = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(
+        2,
+        "0"
+      );
+      var hours = String(
+        Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      ).padStart(2, "0");
+      var minutes = String(
+        Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+      ).padStart(2, "0");
+      var seconds = String(
+        Math.floor((distance % (1000 * 60)) / 1000)
+      ).padStart(2, "0");
+
+      document.getElementById("days").innerHTML = `<p>${days}</p>`;
+      document.getElementById("hours").innerHTML = `<p>${hours}</p>`;
+      document.getElementById("minutes").innerHTML = `<p>${minutes}</p>`;
+      document.getElementById("secs").innerHTML = `<p>${seconds}</p>`;
+
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("#mobile-countdown").innerHTML =
+          "Currently running, until 5PM PDT August 28th!";
+        document.getElementById("#countdown").style.display = "none";
+      }
+    }, 1000);
+  </script>
+  <script src="http://ronenness.github.io/RPGUI/rpgui/rpgui.min.js"></script>
 </html>
