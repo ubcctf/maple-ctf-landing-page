@@ -38,9 +38,35 @@
     <div class="content">
       <div class="description">
         <image id="logo" src="assets/images/maplectf-2023.png" alt="MapleCTF 2023 logo" width="400px" height="400px" onmouseover="document.getElementById('logo').src='assets/images/mapel-transparent.png';" onmouseout="document.getElementById('logo').src='assets/images/maplectf-2023.png';"></image>
-        <p>Coming end of August.</p>
+        <p>September 30th, 00:00 UTC to October 2nd, 00:00 UTC.</p>
+        <p style="font-size: 0.75em;">Localized: <timestamp>1696032000</timestamp> to <timestamp>1696204800</timestamp>.</p>
+        <p>Infra sponsored by <a href="https://goo.gle/ctfsponsorship">goo.gle/ctfsponsorship</a>.</p>
+        <p>Mark your calendars!</p>
       </div>
     </div>
   </div>
 </body>
+<script>
+  let locale = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    timeZoneName: "short",
+    hour12: true,
+  });
+  for (let timestamp of document.getElementsByTagName("timestamp")) {
+    let date = new Date(Number(timestamp.innerText) * 1000);
+    let parts = locale.formatToParts(date).map(x => x.value);
+    switch (parts[2]) {
+      case "1": parts[2] += "st"; break;
+      case "2": parts[2] += "nd"; break;
+      case "3": parts[2] += "rd"; break;
+      default: parts[2] += "th"; break;
+    }
+    parts[3] = ", ";
+    timestamp.innerText = parts.join("");
+  }
+  console.log("fuck")
+</script>
 </html>
